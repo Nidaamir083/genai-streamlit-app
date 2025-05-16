@@ -1,3 +1,5 @@
+import os
+os.environ["STREAMLIT_WATCH_FILE_SYSTEM"] = "false"
 
 import streamlit as st
 import pandas as pd
