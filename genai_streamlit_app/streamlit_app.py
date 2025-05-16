@@ -9,7 +9,7 @@ import requests
 from Bio import Entrez
 from transformers import pipeline
 
-Entrez.email = "your-email@example.com"
+Entrez.email = "nida.amir@gmail.com"
 
 @st.cache_resource
 def load_model():
