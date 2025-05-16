@@ -1,0 +1,13 @@
+
+streamlit
+biopython
+transformers
+datasets
+openai
+arxiv
+wikipedia
+sentence-transformers
+langchain
+matplotlib
+langchain-community
+seaborn
