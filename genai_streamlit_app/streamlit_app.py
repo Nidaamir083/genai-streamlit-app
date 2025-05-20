@@ -10,7 +10,7 @@ st.set_page_config(
     page_icon="🔬"
 )
 # Set background image (must come right after page config)
-background_url = "https://www.yomu.ai/_next/image?url=https%3A%2F%2Fmars-images.imgix.net%2Fseobot%2Fyomu.ai%2F66fddfacb73bfea48e23e839-f6ce70040dea2c7b011ccfe0680258d1.png%3Fauto%3Dcompress&w=1920&q=75"
+background_url = "https://static.scientificamerican.com/sciam/cache/file/FECA0ED6-15DF-4CFF-8D8C6881CAFE713E_source.jpg?w=1200"
 st.markdown(
     f"""
     <style>
