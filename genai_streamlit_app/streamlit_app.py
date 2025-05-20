@@ -74,6 +74,25 @@ def ask_scientific_question(question, context):
 st.title("🔬 GenAI for Scientific QA and Drug Repurposing")
 topic = st.text_input("Enter a research topic:", "drug repurposing for anaplastic thyroid cancer")
 
+# Streamlit UI setup
+st.set_page_config(page_title="Find Your Research", layout="wide")
+
+background_url = "https://www.yomu.ai/_next/image?url=https%3A%2F%2Fmars-images.imgix.net%2Fseobot%2Fyomu.ai%2F66fddfacb73bfea48e23e839-f6ce70040dea2c7b011ccfe0680258d1.png%3Fauto%3Dcompress&w=1920&q=75"
+st.markdown(
+    f'''
+    <style>
+        .stApp {{
+            background-image: url("{background_url}");
+            background-size: cover;
+            background-attachment: fixed;
+        }}
+    </style>
+    ''',
+    unsafe_allow_html=True
+)
+
+st.markdown("<h1 style='color: #4CAF50;'>🔬 Find Your Research</h1>", unsafe_allow_html=True)
+
 if topic:
     with st.spinner("Fetching data..."):
         data = build_merged_report(topic)
