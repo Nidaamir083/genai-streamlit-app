@@ -69,8 +69,8 @@ def ask_scientific_question(question, context):
     prompt = f"Context: {context}\n\nQuestion: {question}"
     return qa_pipeline(prompt, max_new_tokens=300)[0]["generated_text"].strip()
 
-st.title("🔬 GenAI for Scientific QA and Drug Repurposing")
-topic = st.text_input("Enter a research topic:", "drug repurposing for anaplastic thyroid cancer")
+st.title("🔬 Find Your Research")
+topic = st.text_input("Enter a research topic:", "AI in thyroid Cancer")
 
 if topic:
     with st.spinner("Fetching data..."):
