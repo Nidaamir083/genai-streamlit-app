@@ -10,7 +10,7 @@ st.set_page_config(
     page_icon="🔬"
 )
 # Set background image (must come right after page config)
-background_url = "https://static.scientificamerican.com/sciam/cache/file/FECA0ED6-15DF-4CFF-8D8C6881CAFE713E_source.jpg?w=1200"
+background_url = "C:\Users\DELL\Pictures\Saved Pictures"
 st.markdown(
     f"""
     <style>
