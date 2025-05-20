@@ -10,7 +10,7 @@ st.set_page_config(
     page_icon="🔬"
 )
 # Set background image (must come right after page config)
-background_url = "C:\Users\DELL\Pictures\Saved Pictures"
+background_url = "https://astrixinc.com/wp-content/uploads/2025/04/AI-Image-1.jpg"
 st.markdown(
     f"""
     <style>
