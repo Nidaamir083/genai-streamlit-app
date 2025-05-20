@@ -2,6 +2,36 @@ import os
 os.environ["STREAMLIT_WATCH_FILE_SYSTEM"] = "false"
 
 import streamlit as st
+
+# Set page config FIRST (before any other Streamlit commands)
+st.set_page_config(
+    page_title="Find Your Research", 
+    layout="wide",
+    page_icon="🔬"
+)
+# Set background image (must come right after page config)
+background_url = "https://www.yomu.ai/_next/image?url=https%3A%2F%2Fmars-images.imgix.net%2Fseobot%2Fyomu.ai%2F66fddfacb73bfea48e23e839-f6ce70040dea2c7b011ccfe0680258d1.png%3Fauto%3Dcompress&w=1920&q=75"
+st.markdown(
+    f"""
+    <style>
+    .stApp {{
+        background-image: url("{background_url}");
+        background-size: cover;
+        background-attachment: fixed;
+        background-position: center;
+    }}
+    .main .block-container {{
+        background-color: rgba(255, 255, 255, 0.9);
+        border-radius: 10px;
+        padding: 2rem;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+    }}
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -74,22 +104,8 @@ def ask_scientific_question(question, context):
 st.title("🔬 GenAI for Scientific QA and Drug Repurposing")
 topic = st.text_input("Enter a research topic:", "drug repurposing for anaplastic thyroid cancer")
 
-# Streamlit UI setup
-st.set_page_config(page_title="Find Your Research", layout="wide")
 
-background_url = "https://www.yomu.ai/_next/image?url=https%3A%2F%2Fmars-images.imgix.net%2Fseobot%2Fyomu.ai%2F66fddfacb73bfea48e23e839-f6ce70040dea2c7b011ccfe0680258d1.png%3Fauto%3Dcompress&w=1920&q=75"
-st.markdown(
-    f'''
-    <style>
-        .stApp {{
-            background-image: url("{background_url}");
-            background-size: cover;
-            background-attachment: fixed;
-        }}
-    </style>
-    ''',
-    unsafe_allow_html=True
-)
+        
 
 st.markdown("<h1 style='color: #4CAF50;'>🔬 Find Your Research</h1>", unsafe_allow_html=True)
 
