@@ -14,7 +14,7 @@ def add_bg_from_url():
          f"""
          <style>
          .stApp {{
-             background-image: url("https://easy-peasy.ai/cdn-cgi/image/quality=80,format=auto,width=700/https://media.easy-peasy.ai/ec45d6aa-002f-4c5b-90cc-461a65685366/f2f3789e-2df9-46c0-959f-edbb20f8e458.png");
+             background-image: url("https://astrixinc.com/wp-content/uploads/2025/04/AI-Image-1.jpg");
              background-attachment: fixed;
              background-size: cover
          }}
