@@ -1,7 +1,57 @@
 import os
 os.environ["STREAMLIT_WATCH_FILE_SYSTEM"] = "false"
 
+
 import streamlit as st
+from PIL import Image
+
+# Set page config first
+st.set_page_config(page_title="Find Your Research", layout="wide")
+
+# Add background image
+def add_bg_from_url():
+    st.markdown(
+         f"""
+         <style>
+         .stApp {{
+             background-image: url("https://img.freepik.com/free-vector/background-realistic-abstract-technology-particle_23-2148431735.jpg?ga=GA1.1.644117138.1747756933&semt=ais_hybrid&w=740");
+             background-attachment: fixed;
+             background-size: cover
+         }}
+         .main {{
+             background-color: rgba(255, 255, 255, 0.9);
+             padding: 2rem;
+             border-radius: 10px;
+             margin: 2rem 0;
+         }}
+         h1 {{
+             color: #4a4a4a;
+         }}
+         </style>
+         """,
+         unsafe_allow_html=True
+     )
+
+add_bg_from_url()
+
+# App content
+st.title("Find Your Research")
+st.write("Welcome to FYR!")
+
+# Add a sidebar
+with st.sidebar:
+    st.header("Settings")
+    option = st.selectbox("Choose an option", ["Option 1", "Option 2", "Option 3"])
+    
+# Main content area
+col1, col2 = st.columns(2)
+with col1:
+    st.subheader("Feature 1")
+    st.write("This is some content in the first column.")
+
+with col2:
+    st.subheader("Feature 2")
+    st.write("This is some content in the second column.")
 
 # Set page config FIRST (before any other Streamlit commands)
 st.set_page_config(
