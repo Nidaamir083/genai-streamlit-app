@@ -14,7 +14,7 @@ def add_bg_from_url():
          f"""
          <style>
          .stApp {{
-             background-image: url("https://img.freepik.com/free-vector/background-realistic-abstract-technology-particle_23-2148431735.jpg?ga=GA1.1.644117138.1747756933&semt=ais_hybrid&w=740");
+             background-image: url("https://easy-peasy.ai/cdn-cgi/image/quality=80,format=auto,width=700/https://media.easy-peasy.ai/ec45d6aa-002f-4c5b-90cc-461a65685366/f2f3789e-2df9-46c0-959f-edbb20f8e458.png");
              background-attachment: fixed;
              background-size: cover
          }}
