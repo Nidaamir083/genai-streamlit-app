@@ -7,6 +7,7 @@ import wikipedia
 import arxiv
 import requests
 from Bio import Entrez
+from Bio import Medline
 from transformers import pipeline
 
 Entrez.email = "nida.amir0083@example.com"
@@ -37,14 +38,29 @@ def load_model():
 
 qa_pipeline = load_model()
 
+from Bio import Medline
+
 def fetch_pubmed_articles(query, start_year=2015, end_year=2024, max_results=20):
     handle = Entrez.esearch(db="pubmed", term=query, mindate=f"{start_year}/01/01",
                             maxdate=f"{end_year}/12/31", retmax=max_results)
     record = Entrez.read(handle)
     ids = record["IdList"]
-    handle = Entrez.efetch(db="pubmed", id=ids, rettype="abstract", retmode="text")
-    abstracts = [a.strip() for a in handle.read().split("\n\n") if len(a.strip()) > 100]
-    return pd.DataFrame({"abstract": abstracts, "source": ["PubMed"] * len(abstracts)})
+
+    handle = Entrez.efetch(db="pubmed", id=ids, rettype="medline", retmode="text")
+    records = list(Medline.parse(handle))
+    
+    articles = []
+    for rec in records:
+        abstract = rec.get("AB", "")
+        pubdate = rec.get("DP", "Unknown")
+        if len(abstract.strip()) > 100:
+            articles.append({
+                "abstract": abstract,
+                "source": "PubMed",
+                "title": rec.get("TI", "No title"),
+                "date": pubdate
+            })
+    return pd.DataFrame(articles)
 
 def get_wikipedia_background(topic):
     try:
@@ -75,15 +91,17 @@ def build_merged_report(topic, pubmed_limit=5, arxiv_limit=5):
 def visualize_results(data):
     for doc in data:
         doc['source'] = doc.get('source', 'Unknown')
+        doc['date'] = str(doc.get('date', 'Unknown'))[:4]  # Extract year only
+    
     df = pd.DataFrame(data)
-    fig, ax = plt.subplots()
-    sns.countplot(data=df, x='source', order=df['source'].value_counts().index, palette='pastel', ax=ax)
-    for p in ax.patches:
-        ax.annotate(f'{int(p.get_height())}', (p.get_x() + p.get_width() / 2., p.get_height()),
-                    ha='center', va='center', fontsize=11, color='black', xytext=(0, 5),
-                    textcoords='offset points')
+    fig, ax = plt.subplots(figsize=(10, 6))
+    sns.countplot(data=df, x='date', hue='source', palette='pastel', ax=ax)
+    ax.set_title("Article Counts by Year and Source")
+    ax.set_xlabel("Year")
+    ax.set_ylabel("Count")
     plt.xticks(rotation=45)
     st.pyplot(fig)
+
 
 def ask_scientific_question(question, context):
     prompt = f"Context: {context}\n\nQuestion: {question}"
@@ -102,8 +120,10 @@ if topic:
 
     st.subheader("📚 Sources")
     for doc in data:
-       st.markdown(f"- **{doc.get('source')}**: {doc.get('title', doc.get('abstract', doc.get('summary', 'N/A')))[:80]}...")
-        
+        title_or_text = doc.get('title', doc.get('abstract', doc.get('summary', 'N/A')))[:80]
+        date = doc.get('date', 'N/A')
+        st.markdown(f"- **{doc.get('source')}** ({date}): {title_or_text}...")
+
     st.subheader("🧠 Ask a Scientific Question")
     question = st.text_input("What would you like to ask?", "What AI tools are used in the diagnosis of Thyroid cancer?")
     if st.button("Get Answer"):
