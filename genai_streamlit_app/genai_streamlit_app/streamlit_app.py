@@ -124,6 +124,37 @@ if topic:
         date = doc.get('date', 'N/A')
         st.markdown(f"- **{doc.get('source')}** ({date}): {title_or_text}...")
 
+    # After visualizations and source listing
+st.subheader("📚 Sources")
+for doc in data:
+    title = doc.get('title', 'No title')
+    summary = doc.get('summary', doc.get('abstract', 'No summary available'))
+    date = doc.get('date', 'N/A')
+    if isinstance(date, pd.Timestamp) or hasattr(date, 'strftime'):
+        date = date.strftime('%Y-%m-%d')
+    else:
+        date = str(date)
+    st.markdown(f"**Source:** {doc.get('source', 'Unknown')}")
+    st.markdown(f"**Title:** {title}")
+    st.markdown(f"**Date:** {date}")
+    st.markdown(f"**Summary:** {summary[:300]}...")  # show first 300 chars
+    st.markdown("---")
+
+# NEW SECTION: Overall Summary
+st.subheader("📝 Overall Summary of All Articles")
+
+# Combine summaries/abstracts
+combined_texts = " ".join(doc.get('summary', '') or doc.get('abstract', '') for doc in data)
+
+# Ask the QA model to summarize
+if st.button("Generate Overall Summary"):
+    with st.spinner("Generating summary..."):
+        prompt = f"Summarize the key points and findings from the following articles:\n\n{combined_texts[:4000]}"
+        overall_summary = qa_pipeline(prompt, max_new_tokens=500)[0]["generated_text"].strip()
+    st.markdown("### 🧩 Combined Summary")
+    st.write(overall_summary)
+
+
     st.subheader("🧠 Ask a Scientific Question")
     question = st.text_input("What would you like to ask?", "What AI tools are used in the diagnosis of Thyroid cancer?")
     if st.button("Get Answer"):
