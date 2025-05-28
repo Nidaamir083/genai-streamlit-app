@@ -16,7 +16,7 @@ st.markdown(
     """
     <style>
     body {
-        background-image: url('https://images.unsplash.com/photo-1581091012184-7d29b0b59d83?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');
+        background-image: url('https://huuray.com/wp-content/uploads/2024/01/AI-research-tool-comp.jpg');
         background-size: cover;
         background-repeat: no-repeat;
         background-attachment: fixed;
