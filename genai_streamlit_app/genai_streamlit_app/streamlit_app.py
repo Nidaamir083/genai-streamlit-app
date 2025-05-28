@@ -9,7 +9,27 @@ import requests
 from Bio import Entrez
 from transformers import pipeline
 
-Entrez.email = "your-email@example.com"
+Entrez.email = "nida.amir0083@example.com"
+
+# Add background image using CSS
+st.markdown(
+    """
+    <style>
+    body {
+        background-image: url('https://images.unsplash.com/photo-1581091012184-7d29b0b59d83?ixlib=rb-4.0.3&auto=format&fit=crop&w=1950&q=80');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+    }
+    .stApp {
+        background-color: rgba(255, 255, 255, 0.85); /* semi-transparent white */
+        border-radius: 15px;
+        padding: 20px;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
 @st.cache_resource
 def load_model():
